@@ -1,5 +1,3 @@
-![image](https://github.com/WormBase/hydraconference_2023/assets/33452269/0473a2d4-16ae-4b2a-b723-23f911cb0fd9)
-
 
 # The Hydra Helminth Conference
 Course material for WormBase ParaSite's workshop at the The Hydra Helminth Conference that took place in Hydra, Greece (September 2023).
