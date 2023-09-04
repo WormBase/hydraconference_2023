@@ -100,10 +100,11 @@ To do that:
 
 ![](figures/figure_5.9.png)
 
-15. Click "View an image of this alignment" 
-15. You can now see the alignments showing between the two genomes for the region. Aligned regions between the 2 genomes appear as orange highlighted regions in the background. Utilize the navigation and zoom buttons within the Ensembl Genome Browser to explore the region.
+15. Click "View an image of this alignment"
 
 ![](figures/figure_5.10.png)
+
+15. You can now see the alignments showing between the two genomes for the region. Aligned regions between the 2 genomes appear as orange highlighted regions in the background. Utilize the navigation and zoom buttons within the Ensembl Genome Browser to explore the region.
 
 16. Upon zooming out, it becomes evident that there is an orthologue of Smp_000630 in S. haematobium (PRJNA78265) that our comparative genomics pipeline overlooked. Additionally, it is noteworthy that what initially appears as two distinct genes in S. mansoni (Smp_000640 and Smp_000630) corresponds to a single gene in S. haematobium (MS3_00005743).
 
