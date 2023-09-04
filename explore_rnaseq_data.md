@@ -210,7 +210,7 @@ Smp_024180<br>
 
 ![gprofres1](figures/gprofiler_res1.png)
 
-![gprofres2](figures/gprofiler_res2.png)
+![gprofres2](figures/gprofilger_res2.png)
 
 You can read more about the details of the results in the [gProfiler webpage](https://biit.cs.ut.ee/gprofiler/page/docs).
 
