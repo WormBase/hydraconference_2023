@@ -84,8 +84,8 @@ BioMart lets us generate two types of output: data tables, and sequence (FASTA) 
 [↥ **Back to top**](#top)
 
 ---
+## Explore Genomic Pairwise Alignments between genomes in WormBase ParaSite
 
-## Explore Genomic Pairwise Alignments between genomes in WormBase ParaSite
 You are now in the gene page of [_Smp_000630_](https://parasite.wormbase.org/Schistosoma_mansoni_prjea36577/Gene/Summary?db=core;g=Smp_000630;r=SM_V10_3:36381195-36394370;t=Smp_000630.1).
 
 To compare the genomic region of this gene with the S. haematobium genome you can view their pair-wise genomic alignment.
