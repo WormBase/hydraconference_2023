@@ -117,7 +117,7 @@ Gene set enrichment analysis (GSEA) (also called functional enrichment analysis 
 
 ![image](https://user-images.githubusercontent.com/33452269/203346104-4ebe92bf-65c3-44d3-8e16-8bf4cd3342f8.png)
 
-In the previous module we talked about Gene Ontology (GO) [here](https://github.com/WCSCourses/HelminthBioinformatics_2023/blob/wbps_edits/manuals/module_1_WBP1/module_1_WBP1.md#go_terms).
+In a previous workshop we talked about Gene Ontology (GO) [see more here](https://github.com/WCSCourses/HelminthBioinformatics_2023/blob/wbps_edits/manuals/module_1_WBP1/module_1_WBP1.md#go_terms).
 
 "Gene Ontology" enrichment analysis is one of the most commonly used enrichment analyses.
 
@@ -208,9 +208,9 @@ gprofiler_input.png
 
 5. When results appear, scroll down and hover over the points in the graph to explore gene ontologies which are over-represented in your list of genes. You can also click on "Detailed Results" tab to see a table with all the enriched Gene ontology terms.
 
-![gprof](images/gprofiler_res1.png)
+![gprof](figures/gprofiler_res1.png)
 
-![gprof](images/gprofiler_res2.png)
+![gprof](figures/gprofiler_res2.png)
 
 You can read more about the details of the results in the [gProfiler webpage](https://biit.cs.ut.ee/gprofiler/page/docs).
 
