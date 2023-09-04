@@ -203,14 +203,14 @@ Smp_024180<br>
 
 4. Paste the list of downregulated gene IDs into the central text box. Select "Schistosoma Mansoni" under WormBase ParaSite using the "Organism" drop-down menu and then click on "Run Query".
 
-gprofiler_input.png
+![gprofin](figures/gprofiler_input.png)
 
 
 5. When results appear, scroll down and hover over the points in the graph to explore gene ontologies which are over-represented in your list of genes. You can also click on "Detailed Results" tab to see a table with all the enriched Gene ontology terms.
 
-![gprof](figures/gprofiler_res1.png)
+![gprofres1](figures/gprofiler_res1.png)
 
-![gprof](figures/gprofiler_res2.png)
+![gprofres2](figures/gprofiler_res2.png)
 
 You can read more about the details of the results in the [gProfiler webpage](https://biit.cs.ut.ee/gprofiler/page/docs).
 
