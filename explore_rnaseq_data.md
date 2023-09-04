@@ -1,4 +1,4 @@
-## Using JBrowse: basic functionality
+## Visualise RNA-Seq data using JBrowse Genome Browser
 
 In this example we’ll introduce the basic functionality of WormBase ParaSite's JBrowse 1, and demonstrate how to use the various tracks.
 
@@ -62,57 +62,13 @@ Let’s say you want to see in which life stages Smp_312440 is expressed:
 
 As well as looking at publicly available data, you can use WormBase ParaSite JBrowse to visualise your own data.
 
-We’ll demonstrate how to do this using a BAM file that we have provided for you.
-
-**BAM file?**
-A BAM file is a type of file format used in genomics to store DNA sequencing data in a compressed and indexed manner.
-
-In the module 3 data directory you should find a file named SRR3223448.bam. 
-
-As a BAM file, this file is binary, so trying to read it as it is won’t be very informative. To read it we should first convert it into the SAM file format (non-binary, human-readable). We can do that with samtools:
-
-- [Samtools](http://www.htslib.org/doc/samtools.html) is a useful software package for manipulating SAM and BAM files.
-- We will use a samtools command to convert the BAM file to a SAM file so we can have a look at how it’s structured. Move to the module 3 data directory and type the following into your terminal:
-
-```bash
-samtools view -h SRR3223448.bam | less
-```
-
-<details closed>
-<summary> <- Click here to read more about the BAM and SAM file formats at your own time.</summary>
-The SAM file starts with a header section. All header lines begin with a ‘@’ character.
-
-![](figures/jbrowse_10.png)
-
-Move down through the file (by pressing the space bar) until you come to the alignment section. Here, each line represents a sequencing read (though be aware that the lines are long, so a single line will probably wrap around your terminal window a few times). Some of the key fields are labelled below:
-
-![](figures/jbrowse_11.png)
-
-The full SAM specification is available here: http://samtools.github.io/hts-specs/
-
-Before we can visualise the file in JBrowse, we need to create an index. An index is another file that often accompanies a BAM file, and acts like a table of contents. Software such as JBrowse can look inside the index file and find where exactly in the corresponding BAM file it needs to look, without having to go through all of the reads (which would be computationally very expensive).
-
-BAM index files should have exactly the same name as their corresponding BAM file, with the addition of a .bai suffix. We can index our BAM file using samtools. Type:
-
-```bash
-samtools index SRR3223448.bam
-```
-
-You should now see a file called SRR3223448.bam.bai in your working directory. We can now load the file into WormBase ParaSite JBrowse.
-
-![](figures/jbrowse_12.png)
-</details>
-<br>
-
-We can only add an indexed BAM file to Jbrowse (BAM file accompanied by a file with the same name with the addition of a .bai suffix). The BAM file in the directory is already indexed (You should see a file called SRR3223448.bam.bai in your working directory.)
-
-11. To add the BAM track to our Jbrowse instance:
+11. To add a local file to our Jbrowse instance:
     - select the “Track” menu option in the top left of the screen.
     - Selecting “Open track file or URL” will open a dialogue box giving you an option to view a file that is either on your file system, or accessible via a URL.
-    - Select both the BAM file and the index file. JBrowse guesses the file type from the name, but we have an option to correct it if it gets it wrong. We can see that it’s right this time.
+    - JBrowse guesses the file type from the name, but we have an option to correct it if it gets it wrong. We can see that it’s right this time.
     - Click “Open”.
 
-Now we can see the reads aligned to the genome. Notice that this RNA-Seq data is stranded- this means that the library preparation protocol preserved information on which end of the RNA molecule was 5-prime and which end was 3-prime, so we can infer which strand of DNA it was transcribed from. This information is encoded in the BAM file, and JBrowse colours the reads accordingly:
+If for example you upload an alignment file (BAM/SAM), after uploading it, you can see the reads aligned to the genome. Notice that this RNA-Seq data is stranded- this means that the library preparation protocol preserved information on which end of the RNA molecule was 5-prime and which end was 3-prime, so we can infer which strand of DNA it was transcribed from. This information is encoded in the BAM file, and JBrowse colours the reads accordingly:
 - reads aligning to the forward strand are $\textcolor{pink}{\textsf{pink}}$
 - and reads aligning to the reverse strand are $\textcolor{purple}{\textsf{purple}}$
 
@@ -148,39 +104,9 @@ Several files are available for download. These are:
     - Summary files: for each combination of variables for which comparisons have been calculated, this file contains the genes that show a significant difference in at least one comparison. 
     - Full results files: each of these files contain the full DESeq2 results for a contrast (i.e., fold changes for ALL genes, whether or not they are statistically significant).
 
-
 3. Download the full results files for the "Schistosoma mansoni transcriptomics at different life stages" "24-hour-schistosomule-vs-cercariae" experiment by clicking "Full result files for 3 contrasts (zipped) and place it into the "Module_3_WormBaseParaSite_2" directory.
 
-```bash
-cd ~/Module_3_WormBaseParaSite_2
-
-# Extract the compressed directory
-unzip ERP000427.de.contrasts.zip
-
-# move inside the results directory
-cd ERP000427.de.contrasts
-
-# have a look at the 24-hour-schistosomule-vs-cercariae file
-grep -v "^#" 24-hour-schistosomule-vs-cercariae.tsv | less
-```
-
-Use some of the commands you learned yesterday to extract the following information from the "24-hour-schistosomule-vs-cercariae.tsv" file:
-
-4. Extract the top 5 most significantly regulated genes (hint: the final column, "padj", gives the adjusted p value. A smaller adjusted p value = more significant).
-
-```bash
-grep -v "^#" 24-hour-schistosomule-vs-cercariae.tsv | grep -v "^gene_id" | sort -g -k 7,7 | awk -F'\t' '$7 != "NA"' | head -n 5
-```
-
-5. Of the genes with an adjusted p-value that is less than 0.05, which is (a) most highly upregulated in the 24h schistosomules v the cercariae (b) most strongly upregulated in the cercariae v the 24h schistosomules?
-```bash
-# upregulated in the 24h schistosomules means tha Log2FoldChange (column 3) should be a positive number
-grep -v "^#" 24-hour-schistosomule-vs-cercariae.tsv | grep -v "^gene_id" | awk -F'\t' '$7 != "NA" && $7 < 0.05 && $3 > 0' | sort -r -g -k 3,3 | head -n 10
-
-
-# upregulated in the cercariate means tha Log2FoldChange (column 3) should be a negative number
-grep -v "^#" 24-hour-schistosomule-vs-cercariae.tsv | grep -v "^gene_id" | awk -F'\t' '$7 != "NA" && $7 < 0.05 && $3 < 0' | sort -g -k 3,3 | head -n 10
-```
+4. You can use the downloaded file to extract useful information. For example, you can fillter the file to retrieve the top 5 most significantly regulated genes (hint: the final column, "padj", gives the adjusted p value. A smaller adjusted p value = more significant).
 
 [↥ **Back to top**](#top)
 
@@ -216,8 +142,77 @@ and organises them to Gene Ontology terms (GO):
 <br><br>
 WormBase ParaSite offers a tool that performs this kind of analysis: g:Profiler that can be accessed from the "Tools" page:
 
-- Go to WormBase ParaSite (https://parasite.wormbase.org/). Click "Tools" at the top menu. Click "g:Profiler" in the tools table.
+1. Go to WormBase ParaSite (https://parasite.wormbase.org/). Click "Tools" at the top menu. Click "g:Profiler" in the tools table.
 <img width="1440" alt="Screenshot 2022-11-22 at 17 29 02" src="https://user-images.githubusercontent.com/33452269/203386793-b5f8080f-c53f-4cba-9023-876982684f83.png">
+
+2. Let's say you've performed a differentially expressed analysis and came up with a list of differentially expressed genes between two conditions for _S. mansoni_.
+
+<details closed>
+<summary>List of downregulated genes:</summary>
+Smp_131770<br>
+Smp_042150<br>
+Smp_180620<br>
+Smp_086530<br>
+Smp_075800<br>
+Smp_179170<br>
+Smp_142800<br>
+Smp_139240<br>
+Smp_070240<br>
+Smp_202610<br>
+Smp_095520<br>
+Smp_067060<br>
+Smp_074450<br>
+Smp_054300<br>
+Smp_149170<br>
+Smp_123880<br>
+Smp_123540<br>
+Smp_105410<br>
+Smp_139160<br>
+Smp_197370<br>
+Smp_201060<br>
+Smp_043270<br>
+Smp_043250<br>
+Smp_137700<br>
+Smp_194910<br>
+Smp_103610<br>
+Smp_123830<br>
+Smp_194980<br>
+Smp_085180<br>
+Smp_035290<br>
+Smp_128940<br>
+Smp_195180<br>
+Smp_200800<br>
+Smp_141500<br>
+Smp_196840<br>
+Smp_195190<br>
+Smp_123270<br>
+Smp_169200<br>
+Smp_158750<br>
+Smp_119050<br>
+Smp_152580<br>
+Smp_170630<br>
+Smp_130250<br>
+Smp_211020<br>
+Smp_010550<br>
+Smp_016490<br>
+Smp_137720<br>
+Smp_155570<br>
+Smp_143270<br>
+Smp_024180<br>
+</details>
+
+4. Paste the list of downregulated gene IDs into the central text box. Select "Schistosoma Mansoni" under WormBase ParaSite using the "Organism" drop-down menu and then click on "Run Query".
+
+gprofiler_input.png
+
+
+5. When results appear, scroll down and hover over the points in the graph to explore gene ontologies which are over-represented in your list of genes. You can also click on "Detailed Results" tab to see a table with all the enriched Gene ontology terms.
+
+![gprof](images/gprofiler_res1.png)
+
+![gprof](images/gprofiler_res2.png)
+
+You can read more about the details of the results in the [gProfiler webpage](https://biit.cs.ut.ee/gprofiler/page/docs).
 
 [↥ **Back to top**](#top)
 
